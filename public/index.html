@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aditya Anand — Cloud Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --surface: #16161f;
+      --border: rgba(255,255,255,0.07);
+      --accent: #5b6ef5;
+      --accent2: #a78bfa;
+      --text: #e8e8f0;
+      --muted: #6b6b80;
+      --tag-bg: rgba(91,110,245,0.12);
+      --tag-color: #8b9cf8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(91,110,245,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(91,110,245,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glow blob */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(91,110,245,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      backdrop-filter: blur(20px);
+      background: rgba(10,10,15,0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 60px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-content { max-width: 680px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--tag-bg);
+      border: 1px solid rgba(91,110,245,0.25);
+      color: var(--tag-color);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #4a5de0;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: var(--surface);
+    }
+
+    /* Sections */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 60px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 48px;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: rgba(91,110,245,0.3); }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -1px;
+      margin-bottom: 4px;
+    }
+
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 13px; color: var(--muted); }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(91,110,245,0.3);
+      transform: translateY(-2px);
+    }
+
+    .skill-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .skill-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .skill-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-color);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      border: 1px solid rgba(91,110,245,0.15);
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(91,110,245,0.25);
+      transform: translateY(-3px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .project-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 18px;
+      transition: color 0.2s;
+    }
+
+    .project-link:hover { color: var(--accent); }
+
+    .project-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    /* Contact */
+    .contact-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 300px;
+      background: radial-gradient(ellipse, rgba(91,110,245,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-wrapper h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    .contact-wrapper p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .contact-email {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+
+    .contact-email:hover { color: var(--accent2); }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 32px 60px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer span { color: var(--accent); }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      nav ul { gap: 20px; }
+      .hero { padding: 100px 24px 60px; }
+      section { padding: 60px 24px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-wrapper { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">aditya<span>.</span>dev</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Available for opportunities</div>
+      <h1>Building the cloud,<br/><span class="highlight">one service at a time.</span></h1>
+      <p>I'm Aditya Anand — a cloud developer learning to build serverless applications on AWS. Passionate about Python, automation, and shipping things that actually work.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View my work →</a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About me</div>
+    <div class="section-title">Who I am</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a <strong>cloud enthusiast</strong> based in India, currently learning how to build scalable, serverless applications using AWS. I believe the best way to learn is to build real projects — so that's exactly what I'm doing.</p>
+        <p>This portfolio itself is hosted on <strong>AWS S3 + CloudFront</strong>, deployed automatically via <strong>GitHub Actions</strong> every time I push code. It's my first cloud project, and the beginning of many more.</p>
+        <p>I'm focused on <strong>Python</strong>, <strong>AWS Lambda</strong>, and building CI/CD pipelines that make deployment effortless.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">1<span>+</span></div>
+          <div class="stat-label">Cloud projects live</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5<span>+</span></div>
+          <div class="stat-label">AWS services learned</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">0<span>$</span></div>
+          <div class="stat-label">Monthly hosting cost</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Things left to learn</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">What I work with</div>
+    <div class="section-title">Skills & tools</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <h3>AWS Cloud</h3>
+        <p>Building and deploying serverless applications using core AWS services.</p>
+        <div class="skill-tags">
+          <span class="tag">S3</span>
+          <span class="tag">Lambda</span>
+          <span class="tag">API Gateway</span>
+          <span class="tag">CloudFront</span>
+          <span class="tag">IAM</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <h3>Python</h3>
+        <p>Writing clean Python for Lambda functions, automation scripts, and backend logic.</p>
+        <div class="skill-tags">
+          <span class="tag">Python 3</span>
+          <span class="tag">boto3</span>
+          <span class="tag">REST APIs</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <h3>CI/CD</h3>
+        <p>Automating deployments so every git push ships code to production automatically.</p>
+        <div class="skill-tags">
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Git</span>
+          <span class="tag">AWS CLI</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <h3>Web</h3>
+        <p>Building static frontends that are fast, responsive, and deployable to the cloud.</p>
+        <div class="skill-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">What I've built</div>
+    <div class="section-title">Projects</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-header">
+          <h3>Serverless Portfolio</h3>
+          <a href="https://github.com/adityaanand-dev/serverless-portfolio" class="project-link" target="_blank">↗</a>
+        </div>
+        <p>This very site — a static portfolio hosted on AWS S3, served via CloudFront, with automatic deployments triggered by GitHub Actions on every push.</p>
+        <div class="skill-tags">
+          <span class="tag">AWS S3</span>
+          <span class="tag">CloudFront</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-header">
+          <h3>Contact Form API</h3>
+          <a href="#" class="project-link">↗</a>
+        </div>
+        <p>A serverless contact form powered by AWS Lambda and API Gateway. Receives form submissions and stores them — no traditional server required.</p>
+        <div class="skill-tags">
+          <span class="tag">Lambda</span>
+          <span class="tag">API Gateway</span>
+          <span class="tag">Python</span>
+          <span class="tag">DynamoDB</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-header">
+          <h3>More coming soon...</h3>
+        </div>
+        <p>Currently learning and building. Next up: adding DynamoDB storage, SES email notifications, and Route 53 custom domain.</p>
+        <div class="skill-tags">
+          <span class="tag">In progress</span>
+          <span class="tag">DynamoDB</span>
+          <span class="tag">SES</span>
+          <span class="tag">Route 53</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-wrapper">
+      <h2>Let's connect</h2>
+      <p>I'm always open to learning from others, collaborating on projects, or just talking cloud. Reach out anytime.</p>
+      <a href="mailto:your@email.com" class="contact-email">your@email.com</a>
+      <div class="social-links">
+        <a href="https://github.com/adityaanand-dev" target="_blank" class="social-link">
+          ⬡ GitHub
+        </a>
+        <a href="https://linkedin.com/in/adityaanand-dev" target="_blank" class="social-link">
+          ⬡ LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by <span>Aditya Anand</span> · Hosted on AWS S3 + CloudFront · Deployed via GitHub Actions</p>
+  </footer>
+
+</body>
+</html>
