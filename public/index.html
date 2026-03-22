@@ -96,12 +96,13 @@
 <body>
 
   <nav>
-    <a href="#" class="nav-logo">Aditya Anand<span>.</span>dev</a>
+    <a href="#" class="nav-logo">aditya<span>.</span>dev</a>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -231,6 +232,67 @@
 
   <hr class="divider"/>
 
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-label">Credentials</div>
+    <div class="section-title">Certifications</div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <div style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">IBM SkillsBuild</div>
+            <h3>Getting Started with Artificial Intelligence</h3>
+          </div>
+          <a href="https://www.credly.com/badges/fef43acd-1a63-49a7-8c4c-83fceb78c216" target="_blank" class="project-link">↗</a>
+        </div>
+        <p>Completed IBM SkillsBuild certification covering core AI concepts, machine learning fundamentals, and real-world AI applications.</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+          <div class="skill-tags">
+            <span class="tag">Artificial Intelligence</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">IBM</span>
+          </div>
+          <span style="font-size:12px;color:var(--muted);">Feb 2026</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div>
+            <div style="font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">IBM SkillsBuild</div>
+            <h3>Journey to Cloud: Envisioning Your Solution</h3>
+          </div>
+          <a href="https://www.credly.com/badges/c2b76f07-57a8-4e86-9b14-3a2959f608a1" target="_blank" class="project-link">↗</a>
+        </div>
+        <p>Completed IBM SkillsBuild certification on cloud computing fundamentals, cloud strategy, and designing scalable cloud-native solutions.</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+          <div class="skill-tags">
+            <span class="tag">Cloud Computing</span>
+            <span class="tag">IBM Cloud</span>
+            <span class="tag">Solution Design</span>
+          </div>
+          <span style="font-size:12px;color:var(--muted);">Feb 2026</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- RESUME DOWNLOAD -->
+  <section style="text-align:center;padding:48px 60px;">
+    <div class="section-label" style="text-align:center;">My Resume</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:32px;font-weight:700;letter-spacing:-1px;color:var(--text);margin-bottom:12px;">Want the full picture?</h2>
+    <p style="font-size:16px;color:var(--muted);margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7;">Download my resume for a complete overview of my experience, skills, and projects.</p>
+    <a href="AdityaAnand_Cloud_Resume.pdf" download="AdityaAnand_Cloud_Resume.pdf" class="btn-primary" style="display:inline-flex;margin:0 auto;">
+      Download Resume ↓
+    </a>
+  </section>
+
+  <hr class="divider"/>
+
   <section id="contact">
     <div class="contact-wrapper">
       <h2>Let's connect</h2>
@@ -245,7 +307,7 @@
       <div class="social-links" style="margin-top:32px;">
         <a href="https://github.com/adityaanand-dev" target="_blank" class="social-link">⬡ GitHub</a>
         <a href="https://linkedin.com/in/anand-aditya01" target="_blank" class="social-link">⬡ LinkedIn</a>
-        <a href="mailto:aaa.adityaanand@gmail.com" class="social-link">⬡ Email</a>
+        <a href="/cdn-cgi/l/email-protection#6e0f0f0f400f0a071a170f0f000f000a2e09030f0702400d0103" class="social-link">⬡ Email</a>
       </div>
     </div>
   </section>
@@ -254,7 +316,7 @@
     <p>Built by <span>Aditya Anand</span> · Hosted on AWS S3 + CloudFront · Deployed via GitHub Actions</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   async function sendMessage() {
     const name = document.getElementById('contact-name').value;
     const email = document.getElementById('contact-email').value;
@@ -273,9 +335,7 @@
         document.getElementById('contact-name').value='';
         document.getElementById('contact-email').value='';
         document.getElementById('contact-message').value='';
-      } else { status.style.color='#f87171'; status.textContent='Something went wrong. Try again!'; }
-    } catch(e) { status.style.color='#f87171'; status.textContent='Network error. Please try again!'; }
+      } else { status.style.color='#f87171'; status.textContent='Error: ' + (data.error || 'Failed to send message.'); }
+    } catch (error) { status.style.color='#f87171'; status.textContent='Error: ' + error.message; }
   }
   </script>
-</body>
-</html>
